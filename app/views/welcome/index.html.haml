@@ -4,5 +4,7 @@
 %p we are pre-beta... stay tuned
 %p
   = link_to 'sign up (beta)', new_user_registration_path
+%p
+  = link_to 'sign in (beta) with facebook', user_omniauth_authorize_path(:facebook)
 %p 
   = link_to 'sign in', new_user_session_path
