@@ -16,6 +16,8 @@ gem 'rails', '4.2.1'
 # Zurb Foundation framework
 gem 'foundation-rails'
 gem 'foundation_rails_helper'
+# simple form helper
+gem 'simple_form'
 # Use HAML for view templates
 gem 'haml-rails'
 # Use SCSS for stylesheets
