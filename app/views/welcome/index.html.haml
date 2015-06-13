@@ -8,6 +8,7 @@
   = link_to 'sign in (beta) with facebook', user_omniauth_authorize_path(:facebook)
 %p
   - if user_signed_in?
-    Hello, #{link_to current_user.email, current_user}
+    %p Hello, #{link_to current_user.email, current_user}
+    %p= link_to 'sign out', destroy_user_session_path, method: :delete
   - else 
     = link_to 'sign in', new_user_session_path
