@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150616173338) do
+ActiveRecord::Schema.define(version: 20150616195125) do
 
   create_table "sites", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "user_id"
+    t.string   "fb_page_id"
   end
 
   add_index "sites", ["user_id"], name: "index_sites_on_user_id"

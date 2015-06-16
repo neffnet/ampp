@@ -4,7 +4,7 @@
   %h3 You manage the following sites:
   %ul#sites-list
     -@sites.each do |site|
-      = content_tag :li, ( link_to site.name, site )
+      = content_tag :li, ( link_to site.name, edit_site_path(site) )
 -else
   %p This account is not managing any sites yet
 
