@@ -1,1 +1,11 @@
 %h1 Hello, #{current_user.email}
+
+-if @sites.any?
+  %h2 You manage the following sites:
+  %ul#sites-list
+    -@sites.each do |site|
+      = content_tag :li, ( link_to site.name, site )
+-else
+  %p This account is not managing any sites yet
+
+
