@@ -1,2 +1,12 @@
-%h1 Welcome#index
-%p Find me in app/views/welcome/index.html.haml
+%h2 AMPP is 
+%h1 Ampp: Music Promo Portal
+
+-if user_signed_in?
+  %h3 Hello, #{current_user.email}
+  %ul
+    %li= link_to 'my Ampp', current_user
+    %li= link_to 'Sign out', destroy_user_session_path, method: :delete
+- else
+  %ul
+    %li= link_to 'Sign in', new_user_session_path
+    %li= link_to 'Sign up (beta)', new_user_registration_path

@@ -163,4 +163,6 @@ SimpleForm.setup do |config|
 
   # Defines which i18n scope will be used in Simple Form.
   # config.i18n_scope = 'simple_form'
+
+  Dir[Rails.root.join("lib/core_ext/simple_form/**/*.rb")].each { |f| require f }
 end
