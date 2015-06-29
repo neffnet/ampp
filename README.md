@@ -24,5 +24,4 @@ Support is planned for the following services:
 - Instagram
 
 
-
-*Ampp* is a project conceived and created by [Spencer Neff](http://neffnet.net) with the help of his mentor at [Bloc.io](http://bloc.io). 
+*Ampp* is a project conceived and created by [Spencer Neff](http://neffnet.net) with the help of his mentor at [Bloc.io](http://bloc.io).
