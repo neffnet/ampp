@@ -34,6 +34,8 @@ gem 'devise'
 gem 'puma'
 # Use figaro for env config
 gem 'figaro'
+# Plataformtec simple_form
+gem 'simple_form'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
