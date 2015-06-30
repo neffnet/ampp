@@ -6,8 +6,15 @@
   %ul
     %li= link_to 'Sign out', destroy_user_session_path, method: :delete
   %h3 Your Sites:
-  %ul#sites
-- else
+  -if @sites.any?
+    %ul
+      - @sites.each do |site|
+        = content_tag :li, link_to( site.name, edit_site_path(site) )
+  -else
+    No sites yet
+  = link_to "Create a new site", new_site_path, class: 'btn primary' 
+
+-else
   %ul
     %li= link_to 'Sign in', new_user_session_path
     %li= link_to 'Sign up (beta)', new_user_registration_path
