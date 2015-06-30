@@ -4,8 +4,9 @@
 -if user_signed_in?
   %h3 Hello, #{current_user.email}
   %ul
-    %li= link_to 'my Ampp', current_user
     %li= link_to 'Sign out', destroy_user_session_path, method: :delete
+  %h3 Your Sites:
+  %ul#sites
 - else
   %ul
     %li= link_to 'Sign in', new_user_session_path
