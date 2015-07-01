@@ -20,7 +20,7 @@ gem 'haml-rails'
 # Zurb Foundation framework
 gem 'foundation-rails'
 gem 'foundation_rails_helper'
-#gem 'compass-rails'
+
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use jquery as the JavaScript library
@@ -37,6 +37,9 @@ gem 'puma'
 gem 'figaro'
 # Plataformtec simple_form
 gem 'simple_form'
+
+# Facebook Graph v2 gem
+gem 'fb_graph2'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
