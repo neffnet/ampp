@@ -15,6 +15,10 @@ class SitesController < ApplicationController
     end
   end
 
+  def edit
+    @site = Site.find(params[:id])
+  end
+
   def show
     @site = Site.find(params[:id])
   end
