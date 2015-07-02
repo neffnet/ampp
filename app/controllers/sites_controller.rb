@@ -19,6 +19,17 @@ class SitesController < ApplicationController
     @site = Site.find(params[:id])
   end
 
+  def update
+    @site = Site.find(params[:id])
+    if @site.update_attributes(site_params)
+      flash[:notice] = "#{@site.name} site updated successfully"
+      redirect_to @site
+    else
+      flash[:error] = "Something went wrong. Please try again."
+      render :edit
+    end
+  end
+
   def show
     @site = Site.find(params[:id])
 
