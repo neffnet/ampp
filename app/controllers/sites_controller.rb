@@ -21,6 +21,20 @@ class SitesController < ApplicationController
 
   def show
     @site = Site.find(params[:id])
+
+    if Rails.env.production?
+      fb_id = ENV['FACEBOOK_APP_ID_DEV']
+      fb_secret = ENV['FACEBOOK_SECRET_DEV']
+    else
+      fb_id = ENV['FACEBOOK_APP_ID_PROD']
+      fb_secret = ENV['FACEBOOK_SECRET_PROD']
+    end
+
+    auth = FbGraph2::Auth.new(fb_id, fb_secret, api_version: 2.2)
+    @fb_page = FbGraph2::Page.new(@site.facebook_page_id, access_token: auth.access_token!).fetch
+  
+    all_events = @fb_page.events.sort_by{|e| e.start_time}
+    @events = all_events.find_all{|e| e.start_time >= Time.now}
   end
 
   protected

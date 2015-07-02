@@ -1,2 +1,21 @@
 %h2= @site.name
 Facebook page ID: #{@site.facebook_page_id}
+
+-if @events.any?
+  %h3 Upcoming Events
+  -@events.each do |e|
+    .fb-event
+      =content_tag :em, e.name
+      %br
+      =e.location
+      %br
+      =e.raw_attributes
+
+  %br
+  %br
+  Available event methods:
+  %ul
+  - e = @events.sample
+  - e.methods.each do |m|
+    =content_tag :li, m.to_s
+  
