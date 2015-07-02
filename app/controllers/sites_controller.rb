@@ -1,4 +1,5 @@
 class SitesController < ApplicationController
+
   def new
     @site = Site.new
   end
@@ -41,9 +42,15 @@ class SitesController < ApplicationController
       fb_secret = ENV['FACEBOOK_SECRET_PROD']
     end
 
-    auth = FbGraph2::Auth.new(fb_id, fb_secret, api_version: 2.2)
+    # auth = Koala::Facebook::OAuth.new(fb_id, fb_secret)
+    # auth = fb_id + '|' + fb_secret
+    # graph = Koala::Facebook::API.new(auth)
+    # @fb_page = graph.get_object(@site.facebook_page_id)
+
+    # trying with FbGraph2 gem...
+    FbGraph2.api_version = 'v2.3'
+    auth = FbGraph2::Auth.new(fb_id, fb_secret)
     @fb_page = FbGraph2::Page.new(@site.facebook_page_id, access_token: auth.access_token!).fetch
-  
     all_events = @fb_page.events.sort_by{|e| e.start_time}
     @events = all_events.find_all{|e| e.start_time >= Time.now}
   end

@@ -38,7 +38,9 @@ gem 'figaro'
 # Plataformtec simple_form
 gem 'simple_form'
 
-# Facebook Graph v2 gem
+# # Koala for Facebook APIs
+# gem 'koala'
+# FbGraph2 gem for Facebook Graph API
 gem 'fb_graph2'
 
 group :development, :test do
