@@ -5,26 +5,11 @@ Facebook page ID: #{@site.facebook_page_id}
   %h3 Upcoming Events
   -@events.each do |e|
     .fb-event
-      =pp e
+      =content_tag :strong, e.name
       %br
-      Event raw attributes: #{e.raw_attributes}
+      = e.description
       %br
-      Event registered attributes: #{e.registered_attributes}
-      %br
-      Location: #{e.location}
-      %br
-      Venue: #{e.venue}
-      %br
-      Owner: #{e.owner}
-      %br
-      -# Page: #{e.page}
+      Picture: #{e.picture}
       %br
 
-  %br
-  %br
-  Available event methods:
-  %ul
-  - e = @events.sample
-  - e.methods.each do |m|
-    =content_tag :li, m.to_s
   

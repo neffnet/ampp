@@ -1,4 +1,5 @@
 class SitesController < ApplicationController
+  include Facebook
 
   def new
     @site = Site.new
@@ -34,25 +35,12 @@ class SitesController < ApplicationController
   def show
     @site = Site.find(params[:id])
 
-    if Rails.env.production?
-      fb_id = ENV['FACEBOOK_APP_ID_DEV']
-      fb_secret = ENV['FACEBOOK_SECRET_DEV']
-    else
-      fb_id = ENV['FACEBOOK_APP_ID_PROD']
-      fb_secret = ENV['FACEBOOK_SECRET_PROD']
-    end
-
-    # auth = Koala::Facebook::OAuth.new(fb_id, fb_secret)
-    # auth = fb_id + '|' + fb_secret
-    # graph = Koala::Facebook::API.new(auth)
-    # @fb_page = graph.get_object(@site.facebook_page_id)
-
-    # trying with FbGraph2 gem...
     FbGraph2.api_version = 'v2.3'
-    auth = FbGraph2::Auth.new(fb_id, fb_secret)
-    @fb_page = FbGraph2::Page.new(@site.facebook_page_id, access_token: auth.access_token!).fetch
+    @fb_page = FbGraph2::Page.new(@site.facebook_page_id, access_token: facebook_app_access_token).fetch
     all_events = @fb_page.events.sort_by{|e| e.start_time}
-    @events = all_events.find_all{|e| e.start_time >= Time.now}
+    events = all_events.find_all{|e| e.start_time >= Time.now}
+
+    @events = events.map { |e| FacebookEvent.new(e.id) }
   end
 
   protected
@@ -60,4 +48,5 @@ class SitesController < ApplicationController
   def site_params
     params.require(:site).permit(:name, :facebook_page_id)
   end
+
 end

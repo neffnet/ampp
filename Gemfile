@@ -42,6 +42,8 @@ gem 'simple_form'
 # gem 'koala'
 # FbGraph2 gem for Facebook Graph API
 gem 'fb_graph2'
+# Tools for making HTTP requests
+gem 'httparty'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
