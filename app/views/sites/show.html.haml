@@ -25,7 +25,7 @@ Facebook page ID: #{@site.facebook_page_id}
       %br
       Description: #{e.description}
       %br
-      Picture: #{e.picture}
+      =image_tag e.picture, alt: e.name
       %br
       %br
 

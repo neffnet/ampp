@@ -9,4 +9,8 @@ module Facebook
     end
     fb_id + '|' + fb_secret
   end
+
+  def fb_graph
+    "https://graph.facebook.com/v2.3/"
+  end
 end

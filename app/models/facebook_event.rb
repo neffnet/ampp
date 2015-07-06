@@ -6,7 +6,7 @@ class FacebookEvent
     @id = facebook_event_id
 
     FbGraph2.api_version = 'v2.3'
-    event = FbGraph2::Event.new(@id, access_token: facebook_app_access_token).fetch(fields: 'name,description,place,picture')
+    event = FbGraph2::Event.new(@id, access_token: facebook_app_access_token).fetch(fields: 'name,description,place')
     @description = event.description
     @name = event.name
     @venue = event.raw_attributes['place']['name']
@@ -14,7 +14,10 @@ class FacebookEvent
     @date = get_date(event.start_time)
     @time = get_time(event.start_time)
     @link = 'https://facebook.com/' + event.id
-    @picture = event.picture.url
+
+    #get a picture
+    get_pic = HTTParty.get( fb_graph + event.id + "/picture?access_token=#{facebook_app_access_token}&type=large&redirect=false" )
+    @picture = get_pic['data']['url']
   end
 
   private
