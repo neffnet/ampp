@@ -1,15 +1,32 @@
 %h2= @site.name
 Facebook page ID: #{@site.facebook_page_id}
+%br
 
 -if @events.any?
   %h3 Upcoming Events
+  %br
   -@events.each do |e|
     .fb-event
+      =p 'Name: ' 
       =content_tag :strong, e.name
       %br
-      = e.description
+      ID: #{e.id}
+      %br
+      Link: #{e.link}
+      %br
+      Venue: #{e.venue}
+      %br
+      Address: #{e.address}
+      =link_to ' go to map', "https://maps.google.com?q=#{e.address}"
+      %br
+      Date: #{e.date}
+      %br
+      Time: #{e.time}
+      %br
+      Description: #{e.description}
       %br
       Picture: #{e.picture}
+      %br
       %br
 
   
