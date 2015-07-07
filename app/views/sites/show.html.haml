@@ -1,9 +1,10 @@
-%h2= @site.name
+%h1= @site.name
 Facebook page ID: #{@site.facebook_page_id}
+%br
 %br
 
 -if @events.any?
-  %h3 Upcoming Events
+  %h2 Upcoming Events
   %br
   -@events.each do |e|
     .fb-event
@@ -28,5 +29,10 @@ Facebook page ID: #{@site.facebook_page_id}
       =link_to image_tag( e.picture, alt: e.name ), e.cover
       %br
       %br
+
+-if @site.albums.any?
+  %h2 Listen
+  - @site.albums.each do |a|
+    = streaming_player(a)
 
   

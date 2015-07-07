@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150707010800) do
+ActiveRecord::Schema.define(version: 20150707174215) do
 
   create_table "albums", force: :cascade do |t|
     t.string   "bandcamp_id"
     t.integer  "site_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "url"
   end
 
   add_index "albums", ["site_id"], name: "index_albums_on_site_id"

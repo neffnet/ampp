@@ -19,7 +19,6 @@ class SitesController < ApplicationController
 
   def edit
     @site = Site.find(params[:id])
-    @new_album = Album.new
   end
 
   def update
