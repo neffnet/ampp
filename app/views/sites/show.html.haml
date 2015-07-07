@@ -25,7 +25,7 @@ Facebook page ID: #{@site.facebook_page_id}
       %br
       Description: #{e.description}
       %br
-      =image_tag e.picture, alt: e.name
+      =link_to image_tag( e.picture, alt: e.name ), e.cover
       %br
       %br
 
