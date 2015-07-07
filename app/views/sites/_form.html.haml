@@ -1,4 +1,18 @@
 = simple_form_for(@site) do |f|
   = f.input :name
   = f.input :facebook_page_id, label: 'Facebook Page ID'
+  .albums
+    %h5 Streaming Music from Bandcamp
+    Enter your Bandcamp username, this is the text in between the "www." and ".bandcamp.com" on any of your Bandcamp pages
+    = f.input :bandcamp_name
+    - if @site.albums.any?
+      - @site.albums.each do |a|
+        = content_tag :div, "Album ID: " + a.bandcamp_id
+    - else
+      %p No albums added yet
+
+  = simple_form_for( @new_album ) do |g|
+    = g.input :bandcamp_id, label: 'Bandcamp Album ID'
+    = g.button :submit
+
   = f.button :submit

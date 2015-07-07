@@ -19,6 +19,7 @@ class SitesController < ApplicationController
 
   def edit
     @site = Site.find(params[:id])
+    @new_album = Album.new
   end
 
   def update
@@ -36,8 +37,8 @@ class SitesController < ApplicationController
     @site = Site.find(params[:id])
 
     FbGraph2.api_version = 'v2.3'
-    @fb_page = FbGraph2::Page.new(@site.facebook_page_id, access_token: facebook_app_access_token).fetch
-    all_events = @fb_page.events.sort_by{|e| e.start_time}
+    fb_page = FbGraph2::Page.new(@site.facebook_page_id, access_token: facebook_app_access_token).fetch
+    all_events = fb_page.events.sort_by{|e| e.start_time}
     events = all_events.find_all{|e| e.start_time >= Time.now}
 
     @events = events.map { |e| FacebookEvent.new(e.id) }
@@ -46,7 +47,7 @@ class SitesController < ApplicationController
   protected
 
   def site_params
-    params.require(:site).permit(:name, :facebook_page_id)
+    params.require(:site).permit(:name, :facebook_page_id, :bandcamp_name)
   end
 
 end
