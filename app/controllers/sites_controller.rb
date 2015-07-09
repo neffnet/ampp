@@ -36,9 +36,9 @@ class SitesController < ApplicationController
     @site = Site.find(params[:id])
 
     FbGraph2.api_version = 'v2.3'
-    fb_page = FbGraph2::Page.new(@site.facebook_page_id, access_token: facebook_app_access_token).fetch
+    fb_page = FbGraph2::Page.new(@site.facebook_page_id, access_token: facebook_app_access_token).fetch()
     all_events = fb_page.events.sort_by{|e| e.start_time}
-    events = all_events.find_all{|e| e.start_time >= Time.now}
+    events = all_events.find_all{|e| e.start_time >= Time.now}.first(5)
 
     @events = events.map { |e| FacebookEvent.new(e.id) }
   end
