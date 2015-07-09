@@ -31,8 +31,9 @@ Facebook page ID: #{@site.facebook_page_id}
       %br
 
 -if @site.albums.any?
-  %h2 Listen
-  - @site.albums.each do |a|
-    = streaming_player(a)
+  - content_for :bc_player do
+    %h2 Listen
+    - @site.albums.each do |a|
+      = streaming_player(a)
 
   
