@@ -9,8 +9,13 @@ class FacebookEvent
     event = FbGraph2::Event.new(@id, access_token: facebook_app_access_token).fetch(fields: 'name,description,place,cover')
     @description = event.description
     @name = event.name
-    @venue = event.raw_attributes['place']['name']
-    @address = get_address(event.raw_attributes['place'])
+    if event.raw_attributes['place']
+      @venue = event.raw_attributes['place']['name']
+      @address = get_address(event.raw_attributes['place'])
+    else
+      @venue = 'TBD'
+      @address = 'TBD'
+    end
     @date = get_date(event.start_time)
     @time = get_time(event.start_time)
     @link = 'https://facebook.com/' + event.id
