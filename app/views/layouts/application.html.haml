@@ -10,5 +10,6 @@
   %body
     = display_flash_messages
     = yield
-    .bc_player
-      = yield :bc_player
+    - if content_for?(:bc_player)
+      .bc_player{:data => {'turbolinks-permanent': true}}
+        = yield :bc_player
