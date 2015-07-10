@@ -9,26 +9,36 @@ Facebook page ID: #{@site.facebook_page_id}
   -@events.each do |e|
     .fb-event
       =p 'Name: ' 
-      =content_tag :strong, e.name
+      =content_tag :strong, e[:name]
       %br
-      ID: #{e.id}
+      ID: #{e[:id]}
       %br
-      Link: #{e.link}
+      =link_to e[:link], e[:link], target: '_blank'
       %br
-      Venue: #{e.venue}
+      Venue: #{e[:venue]}
       %br
-      Address: #{e.address}
-      =link_to ' go to map', "https://maps.google.com?q=#{e.address}"
+      Address: #{e[:address]}
+      =link_to ' go to map', "https://maps.google.com?q=#{e[:address]}", target: '_blank'
       %br
-      Date: #{e.date}
+      Date: #{e[:date]}
       %br
-      Time: #{e.time}
+      Time: #{e[:time]}
       %br
-      Description: #{e.description}
+      Description: #{e[:description]}
       %br
-      =link_to image_tag( e.picture, alt: e.name), e.cover, target: '_blank'
+      =link_to image_tag( e[:picture], alt: e[:name]), e[:cover], target: '_blank'
       %br
       %br
+
+-if @photo_albums
+  -@photo_albums.compact.each do |a|
+    Album ID: #{a[:id]}
+    %br
+    Album name: #{a[:name]}
+    %br
+    Cover pic: #{a[:thumbnail]}
+    %br
+    %br
 
 -if @site.albums.any?
   - content_for :bc_player do

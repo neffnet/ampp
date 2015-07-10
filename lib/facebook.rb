@@ -11,6 +11,6 @@ module Facebook
   end
 
   def fb_graph
-    "https://graph.facebook.com/v2.3/"
+    "https://graph.facebook.com/v2.4/"
   end
 end

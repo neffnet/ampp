@@ -38,11 +38,6 @@ gem 'puma'
 gem 'figaro'
 # Plataformtec simple_form
 gem 'simple_form'
-
-# # Koala for Facebook APIs
-# gem 'koala'
-# FbGraph2 gem for Facebook Graph API
-gem 'fb_graph2'
 # Tools for making HTTP requests
 gem 'httparty'
 
