@@ -32,13 +32,9 @@ Facebook page ID: #{@site.facebook_page_id}
 
 -if @photo_albums
   -@photo_albums.compact.each do |a|
-    Album ID: #{a[:id]}
-    %br
-    Album name: #{a[:name]}
-    %br
-    Cover pic: #{a[:thumbnail]}
-    %br
-    %br
+    .album-link{:id => a[:id]}
+      =link_to( image_tag(a[:thumbnail], alt: a[:name]), '#', data: {'reveal-id': 'gallery'} )
+      =link_to( a[:name], '#', data: {'reveal-id': 'gallery'} )
 
 -if @site.albums.any?
   - content_for :bc_player do
@@ -46,4 +42,10 @@ Facebook page ID: #{@site.facebook_page_id}
     - @site.albums.each do |a|
       = streaming_player(a)
 
-  
+-# modal popup for photo gallery
+#gallery.reveal-modal{"aria-hidden" => "true", "aria-labelledby" => "Photo Gallery", "data-reveal" => "", :role => "dialog"}
+  %h2#galleryTitle Gallery Title Here
+  #mainImage
+  %p.caption
+  #scroller
+  %a.close-reveal-modal{"aria-label" => "Close"} ×

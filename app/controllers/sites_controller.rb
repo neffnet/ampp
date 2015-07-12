@@ -63,7 +63,6 @@ class SitesController < ApplicationController
         :thumbnail => a['picture']['data']['url']
       }
     end
-
   end
 
   protected
