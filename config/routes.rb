@@ -7,5 +7,7 @@ Rails.application.routes.draw do
     resources :albums, only: [:new, :create, :destroy]
   end
 
+  post '/get_album/:id', to: 'sites#get_album'
+
   root to: 'welcome#index'
 end

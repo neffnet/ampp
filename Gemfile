@@ -40,6 +40,8 @@ gem 'figaro'
 gem 'simple_form'
 # Tools for making HTTP requests
 gem 'httparty'
+# "Slick" image carousel
+gem 'jquery-slick-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -65,6 +65,20 @@ class SitesController < ApplicationController
     end
   end
 
+  def get_album
+    id = params[:id]
+    @photos = []
+    data = HTTParty.get( fb_graph + id + "/photos?fields=source,height,width,name&access_token=#{facebook_app_access_token}&pretty=1&limit=25", format: :json)
+    data['data'].each{ |photo| @photos << photo }
+
+    while data['paging']['next']
+      data = HTTParty.get( fb_graph + id + "/photos?fields=source,height,width,name&access_token=#{facebook_app_access_token}&pretty=1&limit=25&after=#{data['paging']['cursors']['after']}", format: :json )
+      data['data'].each{ |photo| @photos << photo }
+    end
+
+    render json: @photos
+  end
+
   protected
 
   def site_params

@@ -32,9 +32,10 @@ Facebook page ID: #{@site.facebook_page_id}
 
 -if @photo_albums
   -@photo_albums.compact.each do |a|
-    .album-link{:id => a[:id]}
-      =link_to( image_tag(a[:thumbnail], alt: a[:name]), '#', data: {'reveal-id': 'gallery'} )
-      =link_to( a[:name], '#', data: {'reveal-id': 'gallery'} )
+    = link_to( '#', class: 'album-link', data: {'id': a[:id], 'reveal-id': 'gallery'} ) do
+      .album-preview
+        = image_tag(a[:thumbnail], alt: a[:name])
+        %h3= a[:name]
 
 -if @site.albums.any?
   - content_for :bc_player do
@@ -44,8 +45,9 @@ Facebook page ID: #{@site.facebook_page_id}
 
 -# modal popup for photo gallery
 #gallery.reveal-modal{"aria-hidden" => "true", "aria-labelledby" => "Photo Gallery", "data-reveal" => "", :role => "dialog"}
-  %h2#galleryTitle Gallery Title Here
-  #mainImage
-  %p.caption
-  #scroller
-  %a.close-reveal-modal{"aria-label" => "Close"} ×
+  .contents
+    %h2#galleryTitle Title
+    #mainImage
+    %p.caption
+    #scroller
+    %a.close-reveal-modal{"aria-label" => "Close"} ×

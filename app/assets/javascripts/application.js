@@ -1,24 +1,39 @@
-// This is a manifest file that'll be compiled into application.js, which will include all the files
-// listed below.
-//
-// Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
-// or any plugin's vendor/assets/javascripts directory can be referenced here using a relative path.
-//
-// It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
-// compiled file.
-//
-// Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
-// about supported directives.
-//
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
 //= require foundation
+//= require jquery.slick
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
-$(document).ready(function(){
+var ready;
+ready = function(){
+
+  // flash messages
   $('.alert-box .close').click(function(){
     $('.alert-box').fadeOut(500);
   });
-});
+
+  // photo gallery
+  $('.album-link').on('click', function(){
+    title = $(this).find('img').attr('alt');
+    id = $(this).attr('data-id');
+    $('#galleryTitle').html(title);    
+    var images;
+    $.ajax({
+      url: '/get_album/' + id,
+      method: 'POST',
+      dataType: 'json',
+      success: function(data){
+        $.each(data, function(){
+          // append thumbnail to scroller
+    
+        });
+      }
+    });
+  });
+
+
+};
+$(document).ready(ready);
+$(document).on('page:load', ready);
