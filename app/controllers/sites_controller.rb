@@ -67,13 +67,31 @@ class SitesController < ApplicationController
 
   def get_album
     id = params[:id]
-    @photos = []
-    data = HTTParty.get( fb_graph + id + "/photos?fields=source,height,width,name&access_token=#{facebook_app_access_token}&pretty=1&limit=25", format: :json)
-    data['data'].each{ |photo| @photos << photo }
+    data = HTTParty.get( fb_graph + id + "/photos?fields=images,height,width,name&access_token=#{facebook_app_access_token}&pretty=1&limit=25", format: :json)
+    @photos = data['data'].map do |photo|
+      sorted = photo['images'].sort{|img| img['height']}
+      {
+        :thumb => sorted.first['source'],
+        :full => sorted.last['source'],
+        :name => photo['name'],
+        :height => sorted.last['height'],
+        :width => sorted.last['width']
+      }
+    end
 
-    while data['paging']['next']
-      data = HTTParty.get( fb_graph + id + "/photos?fields=source,height,width,name&access_token=#{facebook_app_access_token}&pretty=1&limit=25&after=#{data['paging']['cursors']['after']}", format: :json )
-      data['data'].each{ |photo| @photos << photo }
+    while data['paging']['next'] do
+      data = HTTParty.get( fb_graph + id + "/photos?fields=images,height,width,name&access_token=#{facebook_app_access_token}&pretty=1&limit=25&after=#{data['paging']['cursors']['after']}", format: :json )
+      data['data'].each do |photo|
+        sorted = photo['images'].sort{|img| img['height']}
+        next_image = {
+          :thumb => sorted.first['source'],
+          :full => sorted.last['source'],
+          :name => photo['name'],
+          :height => sorted.last['height'],
+          :width => sorted.last['width']
+        }
+        @photos << next_image
+      end
     end
 
     render json: @photos

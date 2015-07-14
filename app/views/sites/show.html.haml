@@ -46,8 +46,8 @@ Facebook page ID: #{@site.facebook_page_id}
 -# modal popup for photo gallery
 #gallery.reveal-modal{"aria-hidden" => "true", "aria-labelledby" => "Photo Gallery", "data-reveal" => "", :role => "dialog"}
   .contents
-    %h2#galleryTitle Title
-    #mainImage
-    %p.caption
-    #scroller
+    %h2#galleryTitle
+    .mainImage
+    .caption
+    .scroller
     %a.close-reveal-modal{"aria-label" => "Close"} ×
