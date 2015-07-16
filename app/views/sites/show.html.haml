@@ -32,7 +32,7 @@ Facebook page ID: #{@site.facebook_page_id}
 
 -if @photo_albums
   -@photo_albums.compact.each do |a|
-    = link_to( '#', class: 'album-link', data: { 'id': a[:id], 'reveal-id': 'gallery', 'behavior':"loadGallery(#{a[:id]}, #{a[:name]})" } ) do
+    = link_to( '#', class: 'album-link', data: { 'id' => a[:id], 'name' => a[:name], 'reveal-id' => 'gallery', 'behavior' => "loadGallery" } ) do
       .album-preview
         = image_tag(a[:thumbnail], alt: a[:name])
         %h3= a[:name]
