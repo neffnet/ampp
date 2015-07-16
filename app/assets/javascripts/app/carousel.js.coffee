@@ -1,10 +1,11 @@
 class Carousel
-  constructor: ({ element, params }) ->
+  constructor: (element, params ) ->
+    console.log('Carousel constructor...')
     @params = params
     @element = element
-    $(element).slick $(defaultParams).merge(params) 
+    $(element).slick( $.merge(_defaultParams, params) ) 
 
-  defaultParams =
+  _defaultParams =
     {
       dots: true,
       arrows: true,
@@ -13,6 +14,7 @@ class Carousel
     }
 
   loadGallery: (id, name) ->
+    console.log('loadGalery triggered')
     # set gallery name
     $("#galleryTitle").html name
     # unload previous gallery
@@ -24,6 +26,8 @@ class Carousel
       error: (jqXHR, textStatus, errorThrown) ->
         alert("Sorry, we couldn't get this from Facebook. Details: #{textStatus}")
       success: ->
+        console.log('ajax success')
+        console.log("data: " + data)
         # set first image caption
         $(".caption").html("#{data[0].name}")
         
@@ -34,15 +38,16 @@ class Carousel
           $(".scroller").slick("slickAdd", "<img source='#{image.thumb}' alt='#{image.name}' width='50%' height='50%' />")
 
 $(document).on "page:change", ->
+  console.log('page:change triggered on carousel class')
   return unless $(".c-sites.a-show").length > 0
   
-  scroller = scroller ? new Carousel $(".scroller"), {
+  scroller = new Carousel $(".scroller"), {
     slidesToShow: 5,
     centerMode: true,
     focusOnSelect: true,
     asNavFor: ".mainImage"
   }
-  mainImage = mainImage ? new Carousel $(".mainImage"), {
+  mainImage = new Carousel $(".mainImage"), {
     slidesToShow: 1,
     slidesToScroll: 1,
     dots: false,

@@ -1,6 +1,7 @@
 window.App ||= {}
 
 App.init = ->
+  console.log('app init')
 
   #flash messages
   $('.alert-box .close').on "click", ->
