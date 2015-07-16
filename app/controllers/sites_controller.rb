@@ -17,6 +17,17 @@ class SitesController < ApplicationController
     end
   end
 
+  def destroy
+    @site = Site.find(params[:id])
+    if @site.destroy
+      flash[:notice] = "The site has been deleted"
+      redirect_to root_path
+    else
+      flash[:error] = "Oops, something went wrong and nothing happened"
+      redirect_to root_path
+    end
+  end
+
   def edit
     @site = Site.find(params[:id])
   end
@@ -36,7 +47,8 @@ class SitesController < ApplicationController
     @site = Site.find(params[:id])
 
     events_query = { access_token: facebook_app_access_token, fields: 'name,id,place,description,cover,picture' }
-    events_data1 = HTTParty.get( "https://graph.facebook.com/v2.3/" + @site.facebook_page_id + "/events", query: events_query ).first[1]
+    url = URI.escape("https://graph.facebook.com/v2.3/" + @site.facebook_page_id + "/events")
+    events_data1 = HTTParty.get( url, query: events_query ).first[1]
     events_data = events_data1.find_all{|e| Time.parse(e['start_time']) >= Time.now}.sort_by{|e| e['start_time']} 
     events = events_data.map do |e|
       {
@@ -54,7 +66,8 @@ class SitesController < ApplicationController
     end
     @events = events.compact
 
-    photo_albums_data1 = HTTParty.get( fb_graph + @site.facebook_page_id + "/albums?access_token=#{facebook_app_access_token}&fields=id,name,picture,created_time" ).first[1]
+    url = URI.escape( fb_graph + @site.facebook_page_id + "/albums?access_token=#{facebook_app_access_token}&fields=id,name,picture,created_time" )
+    photo_albums_data1 = HTTParty.get(url).first[1]
     photo_albums_data = photo_albums_data1.sort_by{|a| a['created_time']}.reverse
     @photo_albums = photo_albums_data.map do |a|
       {
@@ -62,12 +75,14 @@ class SitesController < ApplicationController
         :name => a['name'],
         :thumbnail => a['picture']['data']['url']
       }
-    end
+    end    
   end
 
   def get_album
     id = params[:id]
-    data = HTTParty.get( fb_graph + id + "/photos?fields=images,height,width,name&access_token=#{facebook_app_access_token}&pretty=1&limit=25", format: :json)
+    url = URI.escape(fb_graph + id + "/photos?fields=images,height,width,name&access_token=#{facebook_app_access_token}&pretty=1&limit=25")
+    data = HTTParty.get( url, format: :json)
+    
     @photos = data['data'].map do |photo|
       sorted = photo['images'].sort{|img| img['height']}
       {
@@ -80,7 +95,8 @@ class SitesController < ApplicationController
     end
 
     while data['paging']['next'] do
-      data = HTTParty.get( fb_graph + id + "/photos?fields=images,height,width,name&access_token=#{facebook_app_access_token}&pretty=1&limit=25&after=#{data['paging']['cursors']['after']}", format: :json )
+      url = URI.escape(fb_graph + id + "/photos?fields=images,height,width,name&access_token=#{facebook_app_access_token}&pretty=1&limit=25&after=#{data['paging']['cursors']['after']}")
+      data = HTTParty.get( url, format: :json )
       data['data'].each do |photo|
         sorted = photo['images'].sort{|img| img['height']}
         next_image = {

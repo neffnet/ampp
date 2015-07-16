@@ -4,12 +4,15 @@
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %meta{ :name => "viewport", :content => "width=device-width, initial-scale=1.0" }
     %title= content_for?(:title) ? yield(:title) : "AMPP -- Ampp Music Promo Portal"
-    = stylesheet_link_tag    'application', media: 'all', 'data-tubolinks-track' => true
-    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = stylesheet_link_tag 'application', media: 'all', 'data-tubolinks-track' => true
+    = javascript_include_tag( 'application', 'data-turbolinks-track' => true )
     = csrf_meta_tags
-  %body
+  %body{:class => ["c-" + controller.controller_name, "a-" + params[:action]]}
     = display_flash_messages
     = yield
     - if content_for?(:bc_player)
       #bc_player{:data => {'turbolinks-permanent' => true}}
         = yield :bc_player
+
+    :javascript
+      $(document).foundation();

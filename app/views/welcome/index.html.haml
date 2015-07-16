@@ -13,6 +13,7 @@
           = site.name + ' - '
           = link_to '(edit)', edit_site_path(site)
           = link_to '(view)', site_path(site)
+          = link_to '(delete)', site_path(site), method: :delete, confirm: 'Are you sure? This will delete your site and all its data... No going back.'
   -else
     No sites yet
   = link_to "Create a new site", new_site_path, class: 'btn primary' 
