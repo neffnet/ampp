@@ -1,17 +1,11 @@
 class Carousel
   constructor: (element, params ) ->
     console.log('Carousel constructor...')
+    console.log("params: ")
+    console.log(params)
     @params = params
     @element = element
-    $(element).slick( $.merge(_defaultParams, params) ) 
-
-  _defaultParams =
-    {
-      dots: true,
-      arrows: true,
-      infinite: false,
-      slidesToScroll: 2
-    }
+    $(element).slick(params) 
 
   loadGallery: (id, name) ->
     console.log('loadGalery triggered')
@@ -29,15 +23,18 @@ class Carousel
         console.log('ajax success')
         console.log("data: " + data)
         # set first image caption
-        $(".caption").html("#{data[0].name}")
+        if data[0].name
+          $(".caption").html("#{data[0].name}")
+        else
+          $(".caption").empty()
         
         for image in data
           console.log("image: ")
           console.log(image)
           # lazy load main images
-          $(".mainImage").slick("slickAdd", "<img src='#{image.full}' alt='#{image.name}' />")
+          $(".mainImage").slick("slickAdd", "<div><img src='#{image.full}' alt='#{image.name}' /></div>")
           # thumbnails
-          $(".scroller").slick("slickAdd", "<img src='#{image.thumb}' alt='#{image.name}' width='50%' height='50%' />")
+          $(".scroller").slick("slickAdd", "<div><img src='#{image.thumb}' alt='#{image.name}' width='50%' height='50%' /></div>")
 
 $(document).on "click", "[data-behavior=loadGallery]", ->
   console.log('data-behavior listenter')
@@ -51,16 +48,24 @@ $(document).on "page:change", ->
     slidesToShow: 5,
     centerMode: true,
     focusOnSelect: true,
-    asNavFor: ".mainImage"
+    fade: true,
+    asNavFor: ".mainImage",
+    dots: true,
+    arrows: false,
+    infinite: false,
+    slidesToScroll: 2
   }
   window.mainImage = new Carousel $(".mainImage"), {
     slidesToShow: 1,
     slidesToScroll: 1,
     dots: false,
-    arrows: false,
-    fade: true,
+    arrows: true,
+    infinite: true,
     asNavFor: ".scroller"
   }
 
+$(".reveal-modal").on "opened", ->
+  $(".scroller").slick("setPosition", 0)
+  $(".mainImage").slick("setPosition", 0)
 
 
