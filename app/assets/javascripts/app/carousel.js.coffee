@@ -46,14 +46,11 @@ $(document).on "page:change", ->
   
   window.scroller = new Carousel $(".scroller"), {
     slidesToShow: 5,
-    centerMode: true,
-    focusOnSelect: true,
     fade: true,
     asNavFor: ".mainImage",
-    dots: true,
-    arrows: false,
+    arrows: true,
     infinite: false,
-    slidesToScroll: 2
+    slidesToScroll: 3
   }
   window.mainImage = new Carousel $(".mainImage"), {
     slidesToShow: 1,
@@ -63,9 +60,5 @@ $(document).on "page:change", ->
     infinite: true,
     asNavFor: ".scroller"
   }
-
-$(".reveal-modal").on "opened", ->
-  $(".scroller").slick("setPosition", 0)
-  $(".mainImage").slick("setPosition", 0)
 
 
