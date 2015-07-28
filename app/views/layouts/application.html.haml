@@ -7,12 +7,18 @@
     = stylesheet_link_tag 'application', media: 'all', 'data-tubolinks-track' => true
     = javascript_include_tag( 'application', 'data-turbolinks-track' => true )
     = csrf_meta_tags
-  %body{:class => ["c-" + controller.controller_name, "a-" + params[:action]]}
+  %body{:class => ["c-" + controller.controller_name, "a-" + params[:action]]}    
     = display_flash_messages
-    = yield
+    #header
+      .logo
+        = link_to 'AMPP', '/'
+      .show-for-medium-up
+        \-- Ammp Music Promo Portal
+    #main.row 
+      = yield
     - if content_for?(:bc_player)
       #bc_player{:data => {'turbolinks-permanent' => true}}
         = yield :bc_player
 
-    :javascript
-      $(document).foundation();
+  :javascript
+    $(document).foundation();

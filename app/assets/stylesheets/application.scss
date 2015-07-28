@@ -1,0 +1,44 @@
+/*
+ *= require_tree .
+ *= require_self
+ *= require foundation_and_overrides
+ *= require slick
+ *= require slick-theme
+ */
+
+@import url(http://fonts.googleapis.com/css?family=Nunito);
+@import url(http://fonts.googleapis.com/css?family=Lobster);
+
+$dark: #3B2D38;
+$gray: #BCBDAC;
+$yellow: #CFBE27;
+$orange: #F27435;
+$pink: #F02475;
+
+$main-font: "Nunito";
+$fancy-font: "Lobster";
+
+body {
+  font: $main-font;
+  background-color: $gray;
+
+  a {text-decoration: underline;}
+}
+
+#header {
+  color: white;
+  background-color: $yellow;
+  font: 125% $fancy-font;
+  padding: .1em 0 .1em 2em;
+}
+
+#header .logo {
+  font: 100% $main-font;
+  a {color: white;}
+  a:hover {color: $dark;}
+}
+
+#header div {
+  display: inline-block !important;
+}
+
