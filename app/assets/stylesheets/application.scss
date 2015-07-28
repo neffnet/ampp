@@ -18,18 +18,25 @@ $pink: #F02475;
 $main-font: "Nunito";
 $fancy-font: "Lobster";
 
+#main {max-width: 72rem;}
+.alert-box {
+  max-width: 60%;
+  margin: auto;
+  opacity: .8;
+}
+
 body {
   font: $main-font;
-  background-color: $gray;
+  background-color: $dark;
 
   a {text-decoration: underline;}
 }
 
 #header {
   color: white;
-  background-color: $yellow;
+  background-color: $gray;
   font: 125% $fancy-font;
-  padding: .1em 0 .1em 2em;
+  padding: .1rem 0rem .1rem 2rem;
 }
 
 #header .logo {

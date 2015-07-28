@@ -8,12 +8,12 @@
     = javascript_include_tag( 'application', 'data-turbolinks-track' => true )
     = csrf_meta_tags
   %body{:class => ["c-" + controller.controller_name, "a-" + params[:action]]}    
-    = display_flash_messages
     #header
       .logo
         = link_to 'AMPP', '/'
       .show-for-medium-up
         \-- Ammp Music Promo Portal
+    = display_flash_messages
     #main.row 
       = yield
     - if content_for?(:bc_player)
