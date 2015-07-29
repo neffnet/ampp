@@ -49,7 +49,7 @@ class SitesController < ApplicationController
     events_query = { access_token: facebook_app_access_token, fields: 'name,id,place,description,cover,picture' }
     url = URI.escape("https://graph.facebook.com/v2.3/" + @site.facebook_page_id + "/events")
     events_data1 = HTTParty.get( url, query: events_query ).first[1]
-    events_data = events_data1.find_all{|e| Time.parse(e['start_time']) >= Time.now}.sort_by{|e| e['start_time']} 
+    events_data = events_data1.find_all{|e| Time.parse(e['start_time']) >= Time.now}.sort_by{|e| e['start_time']}.first(6) 
     events = events_data.map do |e|
       {
         :id => e['id'],

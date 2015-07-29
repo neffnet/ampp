@@ -5,18 +5,7 @@
  *= require slick
  *= require slick-theme
  */
-
-@import url(http://fonts.googleapis.com/css?family=Nunito);
-@import url(http://fonts.googleapis.com/css?family=Lobster);
-
-$dark: #3B2D38;
-$gray: #BCBDAC;
-$yellow: #CFBE27;
-$orange: #F27435;
-$pink: #F02475;
-
-$main-font: "Nunito";
-$fancy-font: "Lobster";
+@import 'colors';
 
 #main {max-width: 72rem;}
 .alert-box {
@@ -26,7 +15,7 @@ $fancy-font: "Lobster";
 }
 
 body {
-  font: $main-font;
+  font: "Nunito";
   background-color: $dark;
 
   a {text-decoration: underline;}
@@ -35,12 +24,12 @@ body {
 #header {
   color: white;
   background-color: $gray;
-  font: 125% $fancy-font;
+  font: 125% "Lobster";
   padding: .1rem 0rem .1rem 2rem;
 }
 
 #header .logo {
-  font: 100% $main-font;
+  font-family: "Nunito";
   a {color: white;}
   a:hover {color: $dark;}
 }

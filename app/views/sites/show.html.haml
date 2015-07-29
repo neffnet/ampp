@@ -1,35 +1,27 @@
-%h1= @site.name
-Facebook page ID: #{@site.facebook_page_id}
-%br
-%br
+%h1#site_name= @site.name
 
 -if @events.any?
-  %h2 Upcoming Events
-  %br
-  -@events.each do |e|
-    .fb-event
-      =p 'Name: ' 
-      =content_tag :strong, e[:name]
-      %br
-      ID: #{e[:id]}
-      %br
-      =link_to e[:link], e[:link], target: '_blank'
-      %br
-      Venue: #{e[:venue]}
-      %br
-      Address: #{e[:address]}
-      =link_to ' go to map', "https://maps.google.com?q=#{e[:address]}", target: '_blank'
-      %br
-      Date: #{e[:date]}
-      %br
-      Time: #{e[:time]}
-      %br
-      Description: #{e[:description]}
-      %br
-      =link_to image_tag( e[:picture], alt: e[:name]), e[:cover], target: '_blank'
-      %br
-      %br
-
+  #upcoming_events
+    %h2 UPCOMING EVENTS
+    %ul#events.small-block-grid-1.medium-block-grid-2.large-block-grid-3
+      -@events.each do |e|
+        %li
+          .fb-event
+            .text-center.date
+              =e[:date] 
+            =link_to e[:name], e[:link], class: 'event_name', target: '_blank'
+            .text-center
+              =link_to image_tag( e[:picture], alt: "#{e[:name]} flyer", title: "see full size flyer"), e[:cover], target: '_blank'
+            %span.venue
+              =e[:venue]
+            \- #{e[:time]}
+            %br
+            .text-center
+              =e[:address]
+              =link_to ' (map)', "https://maps.google.com?q=#{e[:address]}", target: '_blank', class: 'map_link'
+            %br
+            =e[:description]
+      
 -if @photo_albums
   -@photo_albums.compact.each do |a|
     = link_to( '#', class: 'album-link', data: { 'id' => a[:id], 'name' => a[:name], 'reveal-id' => 'gallery', 'behavior' => "loadGallery" } ) do
