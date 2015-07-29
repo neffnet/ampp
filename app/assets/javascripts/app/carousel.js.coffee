@@ -32,13 +32,15 @@ class Carousel
         for image in data
           $(".scroller").slick("slickAdd", "<div><img src='#{image.thumb}' alt='#{image.name}' width='50%' height='50%' /></div>")
 
-  changeImage: (index) =>
-    console.log("changing the image... index #{index}")
-    console.log(@image_data[index])
+  changeImage: (i) =>
+    console.log("changing the image... index #{i}")
+    index = i
+    if index < 0
+      index = @image_data.length + index
     $('.mainImage').fadeOut 500, =>
       $('.mainImage').html("<img src='#{@image_data[index].full}' alt='#{@image_data[index].name}' width='#{@image_data[index].width}' height='#{@image_data[index].height}' />")
-      $('.mainImage').fadeIn(500)
-      console.log('callback complete')
+    $('.mainImage').fadeIn(500)
+      # console.log('callback complete')
     if @image_data[index].name
       $(".caption").html("#{@image_data[index].name}")
     else
