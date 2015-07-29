@@ -28,13 +28,6 @@ class Carousel
         # set first image and caption
         self.changeImage(0)
         
-        # $('.mainImage').html("<img src='#{data[0].full}' alt='#{data[0].name}' width='#{data[0].width}' height='#{data[0].height}' />")
-        # set first image caption
-        # if data[0].name
-        #   $(".caption").html("#{data[0].name}")
-        # else
-        #   $(".caption").empty()
-        
         # thumbnails        
         for image in data
           $(".scroller").slick("slickAdd", "<div><img src='#{image.thumb}' alt='#{image.name}' width='50%' height='50%' /></div>")
@@ -42,7 +35,9 @@ class Carousel
   changeImage: (index) =>
     console.log("changing the image... index #{index}")
     console.log(@image_data[index])
-    $('.mainImage').html("<img src='#{@image_data[index].full}' alt='#{@image_data[index].name}' width='#{@image_data[index].width}' height='#{@image_data[index].height}' />")
+    $('.mainImage').fadeOut 500, =>
+      $('.mainImage').html("<img src='#{@image_data[index].full}' alt='#{@image_data[index].name}' width='#{@image_data[index].width}' height='#{@image_data[index].height}' />")
+    $('.mainImage').fadeIn(500)
     if @image_data[index].name
       $(".caption").html("#{@image_data[index].name}")
     else
@@ -50,7 +45,7 @@ class Carousel
 
 
 
-$(document).on "click", "[data-behavior=loadGallery]", ->
+$(document).on "click", ".album-link", ->
   console.log('loading gallery...')
   window.scroller.loadGallery($(@).data('id'), $(@).data('name'))
 

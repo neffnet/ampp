@@ -23,7 +23,7 @@ a:hover {
 }
 
 h2 {
-  font-size: 125%;
+  font: 125% "Nunito";
   color: white;
 }
 
@@ -39,8 +39,19 @@ h2 {
   padding: 0 4px 0 12px;
 }
 
+.photo_album {
+  border: 0.15em solid white;
+  border-radius: 4px;
+  padding-top: 1em;
+}
+
 #gallery {
   background-color: $gray;
+  min-height: 300px;
+}
+
+#gallery .caption {
+  color: $dark;
 }
 
 #gallery .close-reveal-modal {
