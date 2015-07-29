@@ -57,3 +57,33 @@ h2 {
 #gallery .close-reveal-modal {
   color: white;
 }
+
+// ****** EDIT SITE ********
+
+.input-name {
+  height: 1.2em !important;
+  border-radius: 0.5em !important;
+}
+
+.disabled-hint {
+  position: relative;
+  top: -1em;
+  left: 3em;
+  font-size: 70%;
+}
+
+label {
+  color: $gray;
+}
+
+input[type="submit"] {
+  background-color: $pink;
+  -webkit-transition: background-color 1s, border-radius 1s;
+  transition: background-color 1s, border-radius 1s;
+  border-radius: 1em;
+}
+
+input[type="submit"]:hover {
+  background-color: $orange;
+  border-radius: 0;
+}

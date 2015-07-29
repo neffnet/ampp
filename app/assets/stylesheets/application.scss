@@ -12,6 +12,10 @@
   max-width: 60%;
   margin: auto;
   opacity: .8;
+  position: absolute;
+  top: 2em;
+  right: 2em;
+  border-radius: 0.3em;
 }
 
 body {
@@ -37,4 +41,3 @@ body {
 #header div {
   display: inline-block !important;
 }
-

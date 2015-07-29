@@ -1,23 +1,29 @@
-= simple_form_for(@site) do |f|
-  = f.input :name
-  = f.input :facebook_page_id, label: 'Facebook Page ID'
-  Enter your Bandcamp username, this is the text in between the "www." and ".bandcamp.com" on any of your Bandcamp pages
-  = f.input :bandcamp_name
-  = f.button :submit
+#edit-site-form.small-12.medium-10.large-7.columns  
+  = simple_form_for(@site) do |f|
+    - read_only = true if @site.persisted?
+    = f.input :name, input_html: {class: "input-name"}, :disabled => read_only
+    - if read_only
+      .disabled-hint
+        (you can't change your name)
+    Enter your Facebook Page username or ID. This is the unique string or number in the URL of your Facebook Page.
+    = f.input :facebook_page_id, label: false
+    Enter your Bandcamp username. Find it in between the "www." and ".bandcamp.com" on any of your Bandcamp pages.
+    = f.input :bandcamp_name, label: false
+    = f.button :submit
 
-%h5 Streaming Music from Bandcamp
-- if @site.albums.any?
-  - @site.albums.each do |a|
-    .album
-      URL: #{a.url}
-      %br
-      Album ID: #{a.bandcamp_id}
-      = link_to 'delete', site_album_path(@site, a), method: :delete
-- else
-  %p No albums added yet
+  %h2 Streaming Music from Bandcamp
+  - if @site.albums.any?
+    - @site.albums.each do |a|
+      .album
+        URL: #{a.url}
+        %br
+        Album ID: #{a.bandcamp_id}
+        = link_to 'delete', site_album_path(@site, a), method: :delete
+  - else
+    %p No albums added yet
 
-- if @site.persisted?
-  = simple_form_for [@site, Album.new] do |g|
-    = g.input :url, label: 'URL of Bandcamp album page'
-    = g.input :bandcamp_id, label: 'Bandcamp Album ID'
-    = g.button :submit
+  - if @site.persisted?
+    = simple_form_for [@site, Album.new] do |g|
+      = g.input :url, label: 'URL of Bandcamp album page'
+      = g.input :bandcamp_id, label: 'Bandcamp Album ID'
+      = g.button :submit
