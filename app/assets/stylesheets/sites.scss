@@ -26,6 +26,10 @@ h2 {
   font: 125% "Nunito";
   color: white;
 }
+h3 {
+  font: 110% "Nunito";
+  color: $yellow;
+}
 
 #upcoming_events .venue {
   font-size: 125%;
@@ -75,6 +79,18 @@ h2 {
 .new-site-hint {
   position: relative;
   top: -1.8em;
+}
+
+.edit-page-album {
+  border: 0.1em solid $gray;
+  padding: 0.2em;
+  margin-bottom: 0.2em;
+}
+
+.new-player {
+  border: 0.1em solid $yellow;
+  border-radius: 0.2em;
+  padding: 0 0.4em 0 0.4em;
 }
 
 label {
