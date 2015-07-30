@@ -10,4 +10,8 @@ Rails.application.routes.draw do
   post '/get_album/:id', to: 'sites#get_album'
 
   root to: 'welcome#index'
+
+  # use with friendly_id
+  # match(or maybe get) '/:site' => 'sites#show'
 end
+
