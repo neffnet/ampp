@@ -24,6 +24,7 @@
 
   - if @site.persisted?
     = simple_form_for [@site, Album.new] do |g|
-      = g.input :url, label: 'URL of Bandcamp album page'
-      = g.input :bandcamp_id, label: 'Bandcamp Album ID'
-      = g.button :submit
+      = g.input :title, label: 'Name for this album or track'
+      = g.input :url, label: 'Full URL of Bandcamp album page'
+      = g.input :bandcamp_id, label: 'Bandcamp ID (you have to hunt for this in the album embed code provided by Bandcamp)'
+      = g.button :submit, "Add Bandcamp Stream"
