@@ -37,7 +37,7 @@
   - content_for :bc_player do
     %h2 Listen
     - @site.albums.each do |a|
-      = streaming_player(a)
+      = a.player_iframe
 
 -# modal popup for photo gallery
 #gallery.reveal-modal{"aria-hidden" => "true", "aria-labelledby" => "Photo Gallery", "data-reveal" => "", :role => "dialog"}
