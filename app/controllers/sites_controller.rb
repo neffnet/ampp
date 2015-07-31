@@ -45,7 +45,11 @@ class SitesController < ApplicationController
 
   def show
     @site = Site.find(params[:id])
+    @events = get_events
+    @photo_albums = get_albums    
+  end
 
+  def get_events
     events_query = { access_token: facebook_app_access_token, fields: 'name,id,place,description,cover,picture' }
     url = URI.escape("https://graph.facebook.com/v2.3/" + @site.facebook_page_id + "/events")
     events_data1 = HTTParty.get( url, query: events_query ).first[1]
@@ -64,18 +68,21 @@ class SitesController < ApplicationController
         :address => e['place']['location']['street'].to_s + ' ' + e['place']['location']['city'].to_s + ', ' + e['place']['location']['state'].to_s + ' ' + e['place']['location']['zip'].split.first.to_s
       } unless !(e.has_key? 'place')
     end
-    @events = events.compact
+    events.compact
+  end
 
+  def get_albums
     url = URI.escape( fb_graph + @site.facebook_page_id + "/albums?access_token=#{facebook_app_access_token}&fields=id,name,picture,created_time" )
     photo_albums_data1 = HTTParty.get(url).first[1]
     photo_albums_data = photo_albums_data1.sort_by{|a| a['created_time']}.reverse
-    @photo_albums = photo_albums_data.map do |a|
+    photo_albums = photo_albums_data.map do |a|
       {
         :id => a['id'],
         :name => a['name'],
         :thumbnail => a['picture']['data']['url']
       }
-    end    
+    end
+    photo_albums
   end
 
   def get_album
