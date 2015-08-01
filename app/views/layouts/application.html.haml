@@ -10,7 +10,7 @@
   %body{:class => ["c-" + controller.controller_name, "a-" + params[:action]]}    
     #header
       .logo
-        = link_to 'AMPP', '/'
+        = link_to 'AMPP', root_path
       .show-for-medium-up
         \-- Ammp Music Promo Portal
     = display_flash_messages
@@ -18,7 +18,7 @@
       = yield
     - if content_for?(:bc_player)
       #bc_player{:data => {'turbolinks-permanent' => true}}
-        = yield :bc_player
-
+        = yield :bc_player  
+  
   :javascript
     $(document).foundation();

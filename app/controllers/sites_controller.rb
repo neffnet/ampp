@@ -2,7 +2,12 @@ class SitesController < ApplicationController
   include Facebook
 
   def new
-    @site = Site.new
+    if user_signed_in?
+      @site = Site.new
+    else
+      flash[:error] = "Sign in before trying this."
+      redirect_to root_path
+    end
   end
 
   def create
@@ -19,27 +24,42 @@ class SitesController < ApplicationController
 
   def destroy
     @site = Site.find(params[:id])
-    if @site.destroy
-      flash[:notice] = "The site has been deleted"
-      redirect_to root_path
+    if user_signed_in? && @site.user == current_user
+      if @site.destroy
+        flash[:notice] = "The site has been deleted"
+        redirect_to root_path
+      else
+        flash[:error] = "Oops, something went wrong and nothing happened"
+        redirect_to root_path
+      end
     else
-      flash[:error] = "Oops, something went wrong and nothing happened"
+      flash[:error] = "Make sure you are signed in and that you own this site."
       redirect_to root_path
     end
   end
 
   def edit
-    @site = Site.find(params[:id])
+    if user_signed_in? && @site.user == current_user
+      @site = Site.find(params[:id])
+    else
+      flash[:error] = "Make sure you are signed in and that you own the site you are trying to edit."
+      redirect_to root_path
+    end
   end
 
   def update
     @site = Site.find(params[:id])
-    if @site.update_attributes(site_params)
-      flash[:notice] = "#{@site.name} site updated successfully"
-      redirect_to @site
+    if user_signed_in? && @site.user == current_user
+      if @site.update_attributes(site_params)
+        flash[:notice] = "#{@site.name} site updated successfully"
+        redirect_to @site
+      else
+        flash[:error] = "Something went wrong. Please try again."
+        render :edit
+      end
     else
-      flash[:error] = "Something went wrong. Please try again."
-      render :edit
+      flash[:error] = "You are not signed in, or you do not own this site."
+      redirect_to root_path
     end
   end
 
