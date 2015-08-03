@@ -12,6 +12,6 @@ Rails.application.routes.draw do
   root to: 'welcome#index'
 
   # use with friendly_id
-  # match(or maybe get) '/:site' => 'sites#show'
+  get '/:id' => 'sites#show'
 end
 

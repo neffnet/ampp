@@ -23,7 +23,7 @@ class SitesController < ApplicationController
   end
 
   def destroy
-    @site = Site.find(params[:id])
+    @site = Site.friendly.find(params[:id])
     if user_signed_in? && @site.user == current_user
       if @site.destroy
         flash[:notice] = "The site has been deleted"
@@ -39,7 +39,7 @@ class SitesController < ApplicationController
   end
 
   def edit
-    @site = Site.find(params[:id])
+    @site = Site.friendly.find(params[:id])
     if !user_signed_in? || @site.user != current_user
       flash[:error] = "Make sure you are signed in and that you own the site you are trying to edit."
       redirect_to root_path
@@ -51,7 +51,7 @@ class SitesController < ApplicationController
   end
 
   def update
-    @site = Site.find(params[:id])
+    @site = Site.friendly.find(params[:id])
     if user_signed_in? && @site.user == current_user
       if @site.update_attributes(site_params)
         flash[:notice] = "#{@site.name} site updated successfully"
@@ -67,7 +67,7 @@ class SitesController < ApplicationController
   end
 
   def show
-    @site = Site.find(params[:id])
+    @site = Site.friendly.find(params[:id])
     @events = get_events
     @photo_albums = get_albums    
   end
