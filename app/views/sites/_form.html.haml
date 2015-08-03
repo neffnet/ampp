@@ -30,6 +30,9 @@
         = g.input :url, label: 'Full URL of Bandcamp album page'
         = g.input :bandcamp_id, label: 'Bandcamp ID (you have to hunt for this in the album embed code provided by Bandcamp)'
         = g.button :submit, "Add Bandcamp Stream"
+    .add-hidden-item
+      %h2 Hide Events or Photos
+      = button_to "Hide Items", "#", data: {'reveal-id' => 'hidden_items'}
   - else
     .new-site-hint
       (You can add albums after creating this new site)

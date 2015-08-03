@@ -1,2 +1,45 @@
 %h2 Edit your Ampp site
 = render 'form'
+
+-#modal popup for hidden items interface
+#hidden_items.reveal-modal{"aria-hidden" => "true", "aria-labelledby" => "Hide Items", "data-reveal" => "", :role => "dialog"}
+  %h2 Hide Events or Photo Albums
+  %ul.tabs{"data-tab" => ""}
+    %li.tab-title
+      %a{:href => "#hide-events-panel"} Events
+    %li.tab-title
+      %a{:href => "#hide-photos-panel"} Photos
+  .tabs-content
+    %div#hide-items-p1{:class => "content active"}
+      %p Selected Events and Photo Albums will not be displayed on your Ampp site. (Nothing will be removed from Facebook.)
+    .content#hide-events-panel
+      %h3 Hide Events
+      -if @events.any?
+        - @events.each do |event|
+          .event-to-hide.row
+            .small-11.columns.details
+              = image_tag event[:picture]
+              .e-title.text-center= link_to event[:name], event[:link], target: '_blank'
+              .date-venue.text-center
+                = event[:date] + "\n" + event[:venue] + "\n"
+            .small-1.columns
+              .switch.radius
+                %input{:id => "hide-id-#{event[:id]}", :type => "checkbox"}
+                %label{:for => "hide-id-#{event[:id]}"}
+      -else
+        %p You have no upcoming events on your Facebook page.
+    .content#hide-photos-panel
+      %h3 Hide Photo Albums
+      -if @photo_albums.any?
+        -@photo_albums.each do |album|
+          .album-to-hide.row
+            .small-11.columns.details
+              = image_tag album[:thumbnail]
+              .a-title.text-center= album[:name]
+            .small-1.columns
+              .switch.radius
+                %input{:id => "hide-id-#{album[:id]}", :type => "checkbox"}
+                %label{:for => "hide-id-#{album[:id]}"}
+      -else
+        %p No photo albums found. (Something may be wrong...)
+  %a.close-reveal-modal{"aria-label" => "Close"} ×

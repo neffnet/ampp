@@ -15,7 +15,7 @@ class SitesController < ApplicationController
 
     if @site.save
       flash[:notice] = "#{@site.name} site created!" 
-      redirect_to @site
+      render :edit
     else
       flash[:error] = @site.errors
       render :new
@@ -39,12 +39,15 @@ class SitesController < ApplicationController
   end
 
   def edit
-    if user_signed_in? && @site.user == current_user
-      @site = Site.find(params[:id])
-    else
+    @site = Site.find(params[:id])
+    if !user_signed_in? || @site.user != current_user
       flash[:error] = "Make sure you are signed in and that you own the site you are trying to edit."
       redirect_to root_path
     end
+
+    @photo_albums = get_albums
+    @events = get_events
+    @hidden_items = @site.hidden_items.pluck(:uuid)
   end
 
   def update

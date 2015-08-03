@@ -98,6 +98,39 @@ label {
   color: $gray;
 }
 
+#hidden_items {
+  background-color: $dark;
+  border-radius: 1em;
+  border: 0.2em solid $pink;
+}
+
+.event-to-hide, .album-to-hide {
+  border: 0.2em dotted $gray;
+  padding: 0.5em;
+  margin-bottom: 0.3em;
+}
+
+.details {
+  display: inline-block;
+}
+
+.e-title {
+  display: inline-block;
+}
+
+.date-venue {
+  display: inline-block;
+}
+
+.event-to-hide label, .album-to-hide label {
+  top: 12px;
+  right: 15px;
+}
+
+input:checked + label {
+  background-color: $orange !important;
+}
+
 input[type="submit"] {
   background-color: $pink;
   -webkit-transition: background-color 1s, border-radius 1s;

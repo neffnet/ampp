@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150730004143) do
+ActiveRecord::Schema.define(version: 20150803031510) do
 
   create_table "albums", force: :cascade do |t|
     t.string   "bandcamp_id"
@@ -23,6 +23,15 @@ ActiveRecord::Schema.define(version: 20150730004143) do
   end
 
   add_index "albums", ["site_id"], name: "index_albums_on_site_id"
+
+  create_table "hidden_items", force: :cascade do |t|
+    t.integer  "uuid"
+    t.integer  "site_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "hidden_items", ["site_id"], name: "index_hidden_items_on_site_id"
 
   create_table "sites", force: :cascade do |t|
     t.string   "name"
