@@ -9,6 +9,30 @@ body {
   color: $gray;
 }
 
+#nav {
+  border-style: solid;
+  border-width: 3px 0 3px 0;
+  border-radius: 10px;
+  border-color: $gray;
+  position: relative;
+  top: -10px;
+}
+
+#nav li {
+  text-align: center;
+  position: relative;
+  top: 10px;
+  -webkit-transition: color 1s;
+  transition: color 1s;
+}
+#nav li:hover{
+  cursor: pointer;
+  color: $orange;
+}
+#nav li .active {
+  color: white;
+}
+
 a {
   color: $pink;
 }

@@ -1,5 +1,19 @@
 %h1#site_name= @site.name
 
+%ul#nav.small-block-grid-4
+  %li#events-click
+    =fa_icon "glass 2x"
+    Events
+  %li#photos-click
+    = fa_icon "camera 2x"
+    Photos
+  %li#videos-click
+    = fa_icon "video-camera 2x"
+    Videos
+  %li#about-click
+    = fa_icon "envelope 2x"
+    About
+
 -if @events.any?
   #upcoming_events
     %h2 UPCOMING EVENTS
