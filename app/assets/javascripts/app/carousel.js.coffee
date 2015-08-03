@@ -37,6 +37,10 @@ class Carousel
     index = i
     if index < 0
       index = @image_data.length + index
+    if index >= @image_data.length
+      index = index % @image_data.length
+    console.log("adjusted index: #{index}")
+    console.log("@image_data length is #{@image_data.length}")
     $('.mainImage').fadeOut 500, =>
       $('.mainImage').html("<img src='#{@image_data[index].full}' alt='#{@image_data[index].name}' width='#{@image_data[index].width}' height='#{@image_data[index].height}' />")
     $('.mainImage').fadeIn(500)
