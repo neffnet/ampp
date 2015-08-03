@@ -16,9 +16,6 @@
     = display_flash_messages
     #main.row 
       = yield
-    - if content_for?(:bc_player)
-      #bc_player{:data => {'turbolinks-permanent' => true}}
-        = yield :bc_player  
   
   :javascript
     $(document).foundation();

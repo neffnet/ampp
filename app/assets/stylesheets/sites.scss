@@ -62,6 +62,40 @@ h3 {
   color: white;
 }
 
+// ****** STREAMING PLAYER *******
+
+#bc_player {
+  background-color: white;
+  border: 3px solid black;
+  position: fixed;
+  top: 3.5em;
+  right: -1000px;
+}
+
+#bc_player_clicker {
+  display: inline;
+  position: fixed;
+  top: 3em;
+  right: 3em;
+  border: 2px solid $orange;
+  padding: 2px;
+  border-radius: 10px;
+  color: white;
+  background-color: $dark;
+  opacity: 0.7;
+  z-index: 2;
+  -webkit-transition: color 1s, background-color 1s, border-color 1s, opacity 1s;
+  transition: color 1s, background-color 1s, border-color 1s, opacity 1s;
+}
+
+#bc_player_clicker:hover {
+  color: $orange;
+  border-color: $pink;
+  background-color: $gray;
+  opacity: 1;
+  cursor: pointer;
+}
+
 // ****** EDIT SITE ********
 
 .input-name {

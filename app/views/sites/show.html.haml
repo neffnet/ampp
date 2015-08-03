@@ -34,10 +34,14 @@
               =link_to( a[:name], '#', class: 'album-link', data: { 'id' => a[:id], 'name' => a[:name], 'reveal-id' => 'gallery'} )
 
 -if @site.albums.any?
-  - content_for :bc_player do
+  -# streaming player container
+  #bc_player
     %h2 Listen
     - @site.albums.each do |a|
       = a.player_iframe
+  -# streaming player clicker
+  #bc_player_clicker
+    =fa_icon "headphones 4x"
 
 -# modal popup for photo gallery
 #gallery.reveal-modal{"aria-hidden" => "true", "aria-labelledby" => "Photo Gallery", "data-reveal" => "", :role => "dialog"}

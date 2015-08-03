@@ -5,9 +5,11 @@
  *= require slick
  *= require slick-theme
  */
+@import 'font-awesome';
 @import 'colors';
 
 #main {max-width: 72rem;}
+
 .alert-box {
   max-width: 60%;
   margin: auto;
@@ -16,6 +18,7 @@
   top: 2em;
   right: 2em;
   border-radius: 0.3em;
+  z-index: 10;
 }
 
 body {
