@@ -67,9 +67,22 @@ h3 {
 #bc_player {
   background-color: white;
   border: 3px solid black;
-  position: fixed;
+  border-radius: 5px;
+  position: absolute;
   top: 3.5em;
   right: -1000px;
+  padding: 10px;
+  max-width: 740px;
+}
+
+#bc_player h2 {
+  color: $pink;
+  font: 2.5em "Lobster";
+  padding-left: 1.6em;
+}
+
+#bc_player iframe {
+  
 }
 
 #bc_player_clicker {
@@ -83,7 +96,7 @@ h3 {
   color: white;
   background-color: $dark;
   opacity: 0.7;
-  z-index: 2;
+  z-index: 2000;
   -webkit-transition: color 1s, background-color 1s, border-color 1s, opacity 1s;
   transition: color 1s, background-color 1s, border-color 1s, opacity 1s;
 }

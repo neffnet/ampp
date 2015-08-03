@@ -40,7 +40,6 @@ class Carousel
     $('.mainImage').fadeOut 500, =>
       $('.mainImage').html("<img src='#{@image_data[index].full}' alt='#{@image_data[index].name}' width='#{@image_data[index].width}' height='#{@image_data[index].height}' />")
     $('.mainImage').fadeIn(500)
-      # console.log('callback complete')
     if @image_data[index].name
       $(".caption").html("#{@image_data[index].name}")
     else

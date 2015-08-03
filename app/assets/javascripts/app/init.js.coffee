@@ -7,10 +7,11 @@ App.init = ->
   $('.alert-box .close').on "click", ->
     $('.alert-box').fadeOut(500);
 
-  $(".reveal-modal").on "opened", ->
-    console.log('reveal opened, redrawing gallery')
-    $(".scroller").slick("setPosition", 0)
-    $(".mainImage").slick("setPosition", 0)
+  #streaming player clicker
+  $('#bc_player_clicker').on 'click', ->
+    $('#bc_player').animate({
+      right: '40px'
+    }, 1500);
 
 $(document).on "page:change", ->
   App.init()

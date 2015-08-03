@@ -36,7 +36,7 @@
 -if @site.albums.any?
   -# streaming player container
   #bc_player
-    %h2 Listen
+    %h2 Listen Now
     - @site.albums.each do |a|
       = a.player_iframe
   -# streaming player clicker
