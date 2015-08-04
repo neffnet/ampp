@@ -146,7 +146,7 @@ class SitesController < ApplicationController
   protected
 
   def site_params
-    params.require(:site).permit(:name, :facebook_page_id, :bandcamp_name)
+    params.require(:site).permit(:name, :facebook_page_id, :bandcamp_name, :youtube)
   end
 
 end

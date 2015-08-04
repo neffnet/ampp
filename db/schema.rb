@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150803163446) do
+ActiveRecord::Schema.define(version: 20150804010450) do
 
   create_table "albums", force: :cascade do |t|
     t.string   "bandcamp_id"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20150803163446) do
     t.datetime "updated_at",       null: false
     t.string   "bandcamp_name"
     t.string   "slug"
+    t.string   "youtube"
   end
 
   add_index "sites", ["slug"], name: "index_sites_on_slug"
