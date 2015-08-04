@@ -19,4 +19,13 @@ $(document).on 'click', '#bc_player_clicker', ->
 
 # main content transitions
 $(document).on 'click', '#nav li', ->
-  
+  console.log('click click, this is: ')
+  console.log(@)
+  return if $(@).hasClass('active')
+  $('#nav').children().removeClass('active')
+  $('#show-hide-area').children().fadeOut()
+  $(@).addClass('active')
+  i = $('#nav').children().index(@)
+  console.log("click index #{i}")
+  toShow = $('#show-hide-area').children().get(i)
+  $(toShow).fadeIn()
