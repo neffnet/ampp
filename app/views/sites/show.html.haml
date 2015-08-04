@@ -1,7 +1,7 @@
 %h1#site_name= @site.name
 
 %ul#nav.small-block-grid-4
-  %li#events-click
+  %li#events-click.active
     =fa_icon "glass 2x"
     Events
   %li#photos-click
@@ -14,9 +14,9 @@
     = fa_icon "envelope 2x"
     About
 
--if @events.any?
-  #upcoming_events
-    %h2 UPCOMING EVENTS
+#upcoming_events
+  %h2 UPCOMING EVENTS
+  - if @events.any?
     %ul#events.small-block-grid-1.medium-block-grid-2.large-block-grid-3
       -@events.each do |e|
         %li
@@ -35,17 +35,25 @@
               =link_to ' (map)', "https://maps.google.com?q=#{e[:address]}", target: '_blank', class: 'map_link'
             %br
             =e[:description]
+  - else
+    .no-events No upcoming events scheduled.
       
--if @photo_albums
-  #photo_albums
-    %h2 PHOTO ALBUMS
-    %ul.small-block-grid-2.medium-block-grid-3.large-block-grid-4
-      -@photo_albums.compact.each do |a|
-        %li
-          .photo_album.text-center
-            =link_to( image_tag(a[:thumbnail], alt: a[:name]), '#', class: 'album-link', data: { 'id' => a[:id], 'name' => a[:name], 'reveal-id' => 'gallery' } )
-            .album-caption.text-center
-              =link_to( a[:name], '#', class: 'album-link', data: { 'id' => a[:id], 'name' => a[:name], 'reveal-id' => 'gallery'} )
+#photo_albums
+  %h2 PHOTO ALBUMS
+  %ul.small-block-grid-2.medium-block-grid-3.large-block-grid-4
+    -@photo_albums.compact.each do |a|
+      %li
+        .photo_album.text-center
+          =link_to( image_tag(a[:thumbnail], alt: a[:name]), '#', class: 'album-link', data: { 'id' => a[:id], 'name' => a[:name], 'reveal-id' => 'gallery' } )
+          .album-caption.text-center
+            =link_to( a[:name], '#', class: 'album-link', data: { 'id' => a[:id], 'name' => a[:name], 'reveal-id' => 'gallery'} )
+
+#videos
+  %p This part is still under development...
+
+#about
+  %h2 ABOUT
+  %p more coming soon...
 
 -if @site.albums.any?
   -# streaming player container

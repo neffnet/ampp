@@ -29,12 +29,12 @@ body {
   cursor: pointer;
   color: $orange;
 }
-#nav li .active {
-  color: white;
+#nav .active {
+  color: $pink;
 }
 
 a {
-  color: $pink;
+  color: $yellow;
 }
 a:hover {
   color: $orange;
@@ -54,7 +54,7 @@ h3 {
   font: 110% "Nunito";
   color: $yellow;
 }
-
+// ****** EVENTS ******
 #upcoming_events .venue {
   font-size: 125%;
   color: white;
@@ -67,12 +67,28 @@ h3 {
   padding: 0 4px 0 12px;
 }
 
+// ****** PHOTOS ******
+#photo_albums {
+  display: none;
+}
+
 .photo_album {
   border: 0.15em solid white;
   border-radius: 4px;
   padding-top: 1em;
 }
 
+// ****** VIDEOS ******
+#videos {
+  display: none;
+}
+
+// ****** ABOUT ******
+#about {
+  display: none;
+}
+
+// ****** MODAL GALLERY ********
 #gallery {
   background-color: $gray;
   min-height: 420px;

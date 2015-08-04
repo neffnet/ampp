@@ -1,4 +1,4 @@
-#streaming player clicker
+# streaming player clicker
 $(document).on 'click', '#bc_player_clicker', ->
   console.log('clicker clicked')
   console.log(@)
@@ -16,3 +16,7 @@ $(document).on 'click', '#bc_player_clicker', ->
       right: '-1000px'
     }, 1500, ->
       $("#bc_player_clicker").removeClass("popped")
+
+# main content transitions
+$(document).on 'click', '#nav li', ->
+  
