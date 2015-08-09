@@ -13,5 +13,7 @@ Rails.application.routes.draw do
 
   # use with friendly_id
   get '/:id' => 'sites#show'
+  patch '/:id' => 'sites#update'
+
 end
 
