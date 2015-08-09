@@ -7,22 +7,32 @@ class AlbumsController < ApplicationController
     @site = Site.find(params[:site_id])
     @album = @site.albums.build(album_params)
 
-    if @album.save
-      flash[:notice] = "Streaming bandcamp album added!"
-      redirect_to edit_site_path @site
+    if user_signed_in? && @album.site.user == current_user
+      if @album.save
+        flash[:notice] = "Streaming bandcamp album added!"
+        redirect_to edit_site_path @site
+      else
+        flash[:error] = "Something went wrong: #{@album.errors}"
+        redirect_to edit_site_path @site
+      end
     else
-      flash[:error] = "Something went wrong: #{@album.errors}"
+      flash[:error] = "You must be signed in to do this"
       redirect_to edit_site_path @site
     end
   end
 
   def destroy
     @album = Album.find(params[:id])
-    if @album.destroy
-      flash[:notice] = "Album deleted successfully"
-      redirect_to @album.site
+    if user_signed_in? && @album.site.user == current_user 
+      if @album.destroy
+        flash[:notice] = "Album deleted successfully"
+        redirect_to edit_site_path @album.site
+      else
+        flash[:error] = "There was a problem, please try again"
+        redirect_to edit_site_path @album.site
+      end
     else
-      flash[:error] = "There was a problem, please try again"
+      flash[:error] = "Error: You must be signed in and own the album"
       redirect_to edit_site_path @album.site
     end
   end
