@@ -51,7 +51,9 @@
               =link_to( a[:name], '#', class: 'album-link', data: { 'id' => a[:id], 'name' => a[:name], 'reveal-id' => 'gallery'} )
 
   #videos
-    %p This part is still under development...
+    %h2 VIDEOS
+    #youtube_container
+      = embed_youtube_playlist
 
   #about
     %h2 ABOUT

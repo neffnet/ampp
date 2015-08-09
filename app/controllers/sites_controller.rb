@@ -143,10 +143,16 @@ class SitesController < ApplicationController
     render json: @photos
   end
 
+  def embed_youtube_playlist
+    "<iframe id='yt_player_iframe' src='http://www.youtube.com/embed?listType=user_uploads&list=#{@site.youtube}' width='484' height='459' seamless='true'></iframe>".html_safe
+  end
+
   protected
 
   def site_params
     params.require(:site).permit(:name, :facebook_page_id, :bandcamp_name, :youtube)
   end
+
+  helper_method :embed_youtube_playlist
 
 end

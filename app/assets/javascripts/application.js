@@ -5,4 +5,5 @@
 //= require jquery.slick
 //= require app/carousel
 //= require app/transitions
+//= require app/youtube
 //= require app/init
