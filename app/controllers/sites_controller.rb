@@ -144,7 +144,7 @@ class SitesController < ApplicationController
   end
 
   def embed_youtube_playlist
-    "<iframe id='yt_player_iframe' src='http://www.youtube.com/embed?listType=user_uploads&list=#{@site.youtube}' width='484' height='459' seamless='true'></iframe>".html_safe
+    "<iframe id='yt_player_iframe' src='http://www.youtube.com/embed?listType=user_uploads&list=#{@site.youtube}' width='640' height='360' seamless='true' frameborder='0'></iframe>".html_safe
   end
 
   protected
